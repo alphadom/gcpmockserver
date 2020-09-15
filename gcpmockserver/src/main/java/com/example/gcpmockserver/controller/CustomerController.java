@@ -18,7 +18,6 @@ import com.example.gcpmockserver.domain.Customer;
 import com.example.gcpmockserver.exception.CustomerNotFoundException;
 
 @RestController
-@CrossOrigin
 public class CustomerController {
 	
 	List<Customer> customerList = new LinkedList<>();
@@ -32,6 +31,7 @@ public class CustomerController {
 	}
 	
 	// GET/customer/{customerId}
+	@CrossOrigin(origins = "http://localhost:4200")
 	@GetMapping(value = "/customer/{customerId}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Customer> getCustomerById(@PathVariable("customerId") Long customerId
 ) {
