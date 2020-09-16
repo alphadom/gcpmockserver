@@ -1,6 +1,5 @@
 package com.example.gcpmockserver.controller;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -43,11 +42,8 @@ public class CustomerController {
 	        	{
 	        		return new ResponseEntity<Customer>(cust, HttpStatus.OK);
 	        	}
-	        	else
-	        	{
-        			throw new CustomerNotFoundException(customerId);
-	        	}
 			}
+			throw new CustomerNotFoundException(customerId);
 		}
 		return null;
     }
