@@ -1,5 +1,6 @@
 package com.example.gcpmockserver.controller;
 
+import java.time.OffsetDateTime;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.gcpmockserver.domain.Balance;
 import com.example.gcpmockserver.domain.Customer;
 import com.example.gcpmockserver.exception.CustomerNotFoundException;
 
@@ -46,6 +48,52 @@ public class CustomerController {
 			throw new CustomerNotFoundException(customerId);
 		}
 		return null;
+    }
+
+	// GET /customer/{customerId}/account/{accountType}/balance
+	@CrossOrigin(origins = "http://self-service-web-287019.el.r.appspot.com")
+	@GetMapping("/customer/{customerId}/account/{accountType}/balance")
+    public ResponseEntity<Balance> getBalance(@PathVariable("customerId") Long customerId, @PathVariable("accountType") String accountType) throws Exception
+    {
+		if(customerList.size() > 0) {
+			for(int i = 0; i < customerList.size(); i++)
+			{
+				Customer cust = customerList.get(i);
+	        	if(cust!=null && cust.getId() == customerId.intValue() && cust.getAccount().equals(accountType))
+	        	{
+	        		Balance balance = new Balance();
+	        		balance.setAccountId(cust.getId());
+	        		balance.setAsOfDate(OffsetDateTime.now());
+	        		balance.setComplete(true);
+	        		balance.setLastTransactionDate(OffsetDateTime.now());
+	        		balance.setQuantity(cust.getBalance().intValue());
+	        		return new ResponseEntity<Balance>(balance, HttpStatus.OK);
+	        	}
+			}
+			throw new CustomerNotFoundException(customerId);
+		}
+		return null;
+		
+//    	Customer cust = customerRepo.findById(customerId);
+//    	if(cust != null)
+//    	{
+//    		if(cust.getAccount().equals(accountType))
+//        	{
+//        		Balance balance = new Balance();
+//        		balance.setAccountId(cust.getId());
+//        		Long balanceAmount = cust.getBalance();
+//        		balance.setQuantity(balanceAmount.intValue());
+//        		return new ResponseEntity<Balance>(balance, HttpStatus.OK);
+//        	}
+//        	else
+//        	{
+//        		throw new Exception("Sorry you do not have a matching account for : " + accountType);
+//        	}
+//    	}
+//    	else
+//    	{
+//    		throw new Exception("Customer not found for given id :" + customerId);
+//    	}
     }
 
 }
