@@ -31,7 +31,7 @@ public class CustomerController {
 	}
 	
 	// GET/customer/{customerId}
-	@CrossOrigin(origins = "http://localhost:4200")
+	@CrossOrigin(origins = "http://self-service-web-287019.el.r.appspot.com")
 	@GetMapping(value = "/customer/{customerId}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Customer> getCustomerById(@PathVariable("customerId") Long customerId
 ) {
