@@ -32,7 +32,7 @@ public class CustomerController {
 	}
 	
 	// GET/customer/{customerId}
-	@CrossOrigin(origins = "http://self-service-web-287019.el.r.appspot.com")
+	@CrossOrigin(origins = {"http://self-service-web-287019.el.r.appspot.com", "http://localhost:4200"})
 	@GetMapping(value = "/customer/{customerId}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Customer> getCustomerById(@PathVariable("customerId") Long customerId
 ) {
@@ -51,7 +51,7 @@ public class CustomerController {
     }
 
 	// GET /customer/{customerId}/account/{accountType}/balance
-	@CrossOrigin(origins = "http://self-service-web-287019.el.r.appspot.com")
+	@CrossOrigin(origins = {"http://self-service-web-287019.el.r.appspot.com", "http://localhost:4200"})
 	@GetMapping("/customer/{customerId}/account/{accountType}/balance")
     public ResponseEntity<Balance> getBalance(@PathVariable("customerId") Long customerId, @PathVariable("accountType") String accountType) throws Exception
     {
@@ -74,26 +74,6 @@ public class CustomerController {
 		}
 		return null;
 		
-//    	Customer cust = customerRepo.findById(customerId);
-//    	if(cust != null)
-//    	{
-//    		if(cust.getAccount().equals(accountType))
-//        	{
-//        		Balance balance = new Balance();
-//        		balance.setAccountId(cust.getId());
-//        		Long balanceAmount = cust.getBalance();
-//        		balance.setQuantity(balanceAmount.intValue());
-//        		return new ResponseEntity<Balance>(balance, HttpStatus.OK);
-//        	}
-//        	else
-//        	{
-//        		throw new Exception("Sorry you do not have a matching account for : " + accountType);
-//        	}
-//    	}
-//    	else
-//    	{
-//    		throw new Exception("Customer not found for given id :" + customerId);
-//    	}
     }
 
 }
