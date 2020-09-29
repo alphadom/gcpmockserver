@@ -32,7 +32,7 @@ public class CustomerController {
 	}
 	
 	// GET/customer/{customerId}
-	@CrossOrigin(origins = {"http://self-service-web-287019.el.r.appspot.com", "http://localhost:4200"})
+	@CrossOrigin(origins = {"https://self-service-web-287019.el.r.appspot.com","http://self-service-web-287019.el.r.appspot.com", "http://localhost:4200"})
 	@GetMapping(value = "/customer/{customerId}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Customer> getCustomerById(@PathVariable("customerId") Long customerId
 ) {
@@ -51,7 +51,7 @@ public class CustomerController {
     }
 
 	// GET /customer/{customerId}/account/{accountType}/balance
-	@CrossOrigin(origins = {"http://self-service-web-287019.el.r.appspot.com", "http://localhost:4200"})
+	@CrossOrigin(origins = {"https://self-service-web-287019.el.r.appspot.com","http://self-service-web-287019.el.r.appspot.com", "http://localhost:4200"})
 	@GetMapping("/customer/{customerId}/account/{accountType}/balance")
     public ResponseEntity<Balance> getBalance(@PathVariable("customerId") Long customerId, @PathVariable("accountType") String accountType) throws Exception
     {
